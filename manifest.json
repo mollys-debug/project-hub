@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "3.11.15",
+  "metadata": {
+    "appmode": "python-streamlit",
+    "entrypoint": "app.py"
+  },
+  "python": {
+    "version": "3.11.15",
+    "package_manager": {
+      "name": "pip",
+      "version": "24.0",
+      "package_file": "requirements.txt",
+      "packages": {
+        "streamlit": {
+          "version": "1.42.0",
+          "source": "pypi",
+          "require": "streamlit==1.42.0",
+          "hash": "sha256:streamlit"
+        },
+        "requests": {
+          "version": "2.31.0",
+          "source": "pypi",
+          "require": "requests==2.31.0",
+          "hash": "sha256:requests"
+        },
+        "pandas": {
+          "version": "2.2.1",
+          "source": "pypi",
+          "require": "pandas==2.2.1",
+          "hash": "sha256:pandas"
+        },
+        "plotly": {
+          "version": "5.20.0",
+          "source": "pypi",
+          "require": "plotly==5.20.0",
+          "hash": "sha256:plotly"
+        }
+      }
+    }
+  },
+  "files": {
+    "app.py": {
+      "checksum": "81f311db5b7ef1e79d096dd5545c26f9"
+    },
+    "requirements.txt": {
+      "checksum": "8ebcdca23daafaf435752bb2e8f80277"
+    }
+  }
+}
