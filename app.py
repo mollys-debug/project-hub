@@ -6,6 +6,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, date
 import json
+import html as html_lib
 
 # ── Config ──────────────────────────────────────────────────────────────────
 AIRTABLE_API_KEY = os.environ.get("AIRTABLE_API_KEY", "")
@@ -401,7 +402,7 @@ with tab_hub:
             cell = [x for x in items if x["month"] == mi]
             rm_html += "<div class=\"rm-cell\">"
             for item in cell:
-                rm_html += f'<span class="rm-pill" style="background:{bg};color:{tc}">{item["name"]}</span>'
+                rm_html += f'<span class="rm-pill" style="background:{bg};color:{tc}">{html_lib.escape(item["name"])}</span>'
             rm_html += "</div>"
         rm_html += "</div></div>"
     rm_html += "</div></div>"
@@ -433,8 +434,8 @@ with tab_hub:
           <div class="ev-accent-top" style="background:{accent_line}"></div>
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div>
-              <div class="ev-name">{ev['name']}</div>
-              <div class="ev-meta">{f'📅 {date_str} &nbsp;·&nbsp;' if date_str else '📅 Date TBD &nbsp;·&nbsp;'} {ev.get('campaign','') or ''}</div>
+              <div class="ev-name">{html_lib.escape(ev['name'])}</div>
+              <div class="ev-meta">{f'📅 {date_str} &nbsp;·&nbsp;' if date_str else '📅 Date TBD &nbsp;·&nbsp;'} {html_lib.escape(ev.get('campaign','') or '')}</div>
             </div>
             <div style="text-align:right">
               <span style="background:{accent_bg};color:{accent_tc};padding:2px 8px;border-radius:99px;font-size:10px;font-weight:800;text-transform:uppercase">{region_label}</span>
@@ -622,7 +623,7 @@ with tab_people:
             "Seniority":   f.get("Seniority (Source)", ""),
             "Engagement":  engagement,
             "LinkedIn":    f.get("LinkedIn URL (Source)", ""),
-            "All Engagement": int(f.get("All Engagement") or 0),
+            "All Engagement": int(f.get("All Engagement")[0] if isinstance(f.get("All Engagement"), list) else (f.get("All Engagement") or 0)),
         })
 
     df_people = pd.DataFrame(people_rows)
